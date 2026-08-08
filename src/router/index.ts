@@ -1,11 +1,11 @@
 import { createMemoryHistory, createRouter, type RouteRecordRaw } from 'vue-router'
 
-import HelloWorld from '../components/HelloWorld.vue'
+import ShoppingCartPage from '../pages/ShoppingCartPage.vue'
 
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    component: HelloWorld
+    component: ShoppingCartPage
   }
 ]
 
