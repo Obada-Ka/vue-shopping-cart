@@ -132,19 +132,6 @@ export default tseslint.config(
       '@typescript-eslint/explicit-function-return-type': 'off'
     }
   },
-
-  // main.ts: typescript-eslint's type-aware linter can't fully resolve
-  // types across a .vue file boundary the way vue-tsc does (App.vue's
-  // exported type resolves as `error` internally, not because of a real
-  // `any` leak). This is a known limitation, not a code smell — scoped
-  // override rather than weakening the rule project-wide.
-  {
-    files: ['src/main.ts'],
-    rules: {
-      '@typescript-eslint/no-unsafe-argument': 'off'
-    }
-  },
-
   // Disable stylistic rules that conflict with Prettier
   {
     rules: {
