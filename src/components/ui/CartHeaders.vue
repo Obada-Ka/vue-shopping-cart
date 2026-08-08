@@ -1,8 +1,9 @@
 <script setup></script>
 <template>
-  <div class="...">Product</div>
-  <div class="...">Price</div>
-  <div class="...">Quantity</div>
-  <div class="...">Total</div>
-  <div class="...">Cart Totals</div>
+  <div class="grid grid-cols-4 gap-4 py-3 font-semibold">
+    <span>Product</span>
+    <span>Price</span>
+    <span>Quantity</span>
+    <span>Total</span>
+  </div>
 </template>
