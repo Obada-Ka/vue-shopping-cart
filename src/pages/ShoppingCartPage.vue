@@ -2,6 +2,7 @@
 import { onMounted } from 'vue'
 
 import CartHeaders from '@/components/ui/CartHeaders.vue'
+import ProductCard from '@/components/ui/ProductCard.vue'
 import CartSummary from '@/features/cart/components/CartSummary.vue'
 import { useProducts } from '@/features/products'
 import AddProduct from '@/features/products/components/AddProduct.vue'
@@ -10,17 +11,23 @@ import ShippingCalculator from '@/features/shipping/components/ShippingCalculato
 
 const { products, loadProducts } = useProducts()
 onMounted(loadProducts)
+
+const removeProduct = (productId: number): void => {
+  void productId
+}
 </script>
 <template>
   <div class="grid grid-cols-5 items-start gap-4">
-    <!-- Left: Cart -->
     <div class="col-span-4">
       <CartHeaders />
 
-      <div v-for="product in products" :key="product.id" class="grid grid-cols-4 gap-4 py-3">
-        <span>{{ product.category }}</span>
-        <span>{{ product.price }}</span>
-      </div>
+      <ProductCard
+        v-for="product in products"
+        :key="product.id"
+        class="grid grid-cols-4 gap-4 py-3"
+        :product="product"
+        @remove="removeProduct"
+      />
 
       <div class="mt-4 flex gap-4">
         <AddProduct />
@@ -28,9 +35,8 @@ onMounted(loadProducts)
       </div>
     </div>
 
-    <!-- Right: Cart totals column -->
     <div class="flex flex-col gap-4">
-      <div class="py-3 font-semibold">Cart Totals</div>
+      <div class="py-3 font-['Roboto'] font-semibold">Cart Totals</div>
 
       <CartSummary />
 
@@ -38,3 +44,6 @@ onMounted(loadProducts)
     </div>
   </div>
 </template>
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+</style>
