@@ -1,8 +1,19 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+
 import BaseButton from '@/components/ui/BaseButton.vue'
 import { useCart } from '@/features/cart'
 
 const { cartTotal } = useCart()
+
+const tax = computed(() => cartTotal.value * 0.2)
+
+const total = computed(() => {
+  if (cartTotal.value) {
+    return cartTotal.value + tax.value + 100
+  }
+  return 0
+})
 </script>
 
 <template>
@@ -17,14 +28,20 @@ const { cartTotal } = useCart()
     </div>
     <div class="cart-row">
       <span>Tax (20%)</span>
-      <span>$249</span>
+      <span>${{ tax.toFixed(2) }}</span>
     </div>
-    <div class="cart-row">
+    <div class="cart-row pt-4">
       <span>Totals</span>
-      <span>$1434.00</span>
+      <span>${{ total.toFixed(2) }}</span>
     </div>
     <div class="flex justify-center">
-      <BaseButton color="#19D16F" size="md" font="Lato" font-weight="700">
+      <BaseButton
+        color="#19D16F"
+        size="md"
+        font="Lato"
+        font-weight="700"
+        :disabled="cartTotal === 0"
+      >
         Proceed To Checkout
       </BaseButton>
     </div>
@@ -36,10 +53,10 @@ const { cartTotal } = useCart()
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 
 .cart-row {
-  @apply flex justify-between border-b border-[#E8E6F1] pb-2;
+  @apply flex justify-between border-b border-[#E8E6F1] pb-2 text-base font-normal text-[#1D3178];
 }
 
 .cart-row span:first-child {
-  @apply text-lg font-semibold;
+  @apply text-lg font-semibold text-[#1D3178];
 }
 </style>

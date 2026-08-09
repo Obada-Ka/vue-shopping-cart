@@ -48,8 +48,11 @@ function removeProductHandling(productId: number): void {
   <div class="relative grid grid-cols-1 items-start gap-4 lg:grid-cols-5">
     <div class="lg:col-span-4">
       <div class="hidden pb-10 lg:block"><CartHeaders /></div>
+      <div class="sticky top-0 z-10 block border-b border-gray-300 bg-white py-4 lg:hidden">
+        <span class="text-xl font-bold text-[#1D3178]"> Products </span>
+      </div>
 
-      <div class="max-h-[480px] overflow-y-auto">
+      <div class="min-h-fit overflow-y-auto lg:max-h-[480px] lg:min-h-0">
         <template v-if="isLoading">
           <ProductCardSkeleton v-for="n in 5" :key="n" />
         </template>
@@ -71,7 +74,9 @@ function removeProductHandling(productId: number): void {
         </div>
       </div>
 
-      <div class="mt-8 flex gap-4 lg:justify-between">
+      <div
+        class="sticky bottom-12 z-10 mt-8 flex gap-4 bg-white py-4 lg:static lg:z-auto lg:justify-between"
+      >
         <AddProduct class="flex-1 lg:flex-none" />
         <template v-if="listItems.length">
           <ClearProducts class="flex-1 lg:flex-none" />
@@ -80,10 +85,10 @@ function removeProductHandling(productId: number): void {
 
       <button
         type="button"
-        class="mt-4 w-full rounded-md bg-[#1D3178] py-3 text-white lg:hidden"
+        class="sticky bottom-0 z-10 mt-4 w-full rounded-md bg-[#1D3178] py-3 text-white lg:hidden"
         @click="isSummaryOpen = true"
       >
-        View cart summary
+        View Cart Summary
       </button>
     </div>
 
@@ -94,7 +99,7 @@ function removeProductHandling(productId: number): void {
     ></div>
 
     <div
-      class="fixed inset-x-0 bottom-0 z-50 flex flex-col gap-4 overflow-y-auto rounded-t-2xl bg-white p-4 transition-transform duration-300 ease-out lg:static lg:z-auto lg:max-h-none lg:translate-y-0 lg:overflow-visible lg:rounded-none lg:bg-transparent lg:p-0 lg:transition-none"
+      class="fixed inset-x-0 bottom-0 z-50 flex flex-col overflow-y-auto rounded-t-2xl bg-white p-4 transition-transform duration-300 ease-out lg:static lg:z-auto lg:max-h-none lg:translate-y-0 lg:overflow-visible lg:rounded-none lg:bg-transparent lg:p-0 lg:transition-none"
       :class="isSummaryOpen ? 'translate-y-0' : 'translate-y-full'"
     >
       <button
