@@ -1,6 +1,6 @@
 import z from 'zod'
 
-import { productSchema, type Product } from '../types'
+import { productSchema, type Product } from '@/domain/product/product.schema'
 
 const PRODUCTS_API_URL = 'https://fakestoreapi.com/products'
 

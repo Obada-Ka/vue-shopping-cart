@@ -1,8 +1,9 @@
 import { storeToRefs } from 'pinia'
 import type { Ref } from 'vue'
 
+import type { Product } from '@/domain/product/product.schema'
+
 import { useProductsStore } from '../store/productsStore'
-import type { Product } from '../types'
 
 interface UseProductReturn {
   products: Ref<Product[]>

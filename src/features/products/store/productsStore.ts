@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
+import type { Product } from '@/domain/product/product.schema'
+
 import { fetchProducts } from '../api/productsApi'
-import type { Product } from '../types'
 
 export const useProductsStore = defineStore('products', () => {
   const products = ref<Product[]>([])
