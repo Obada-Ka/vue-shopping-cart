@@ -1,30 +1,27 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-
 import BaseButton from '@/components/ui/BaseButton.vue'
-import { useCart } from '@/features/cart'
 
-const { cartTotal } = useCart()
+defineProps<{
+  subtotal: number
+  shipping: number
+  tax: number
+  total: number
+}>()
 
-const tax = computed(() => cartTotal.value * 0.2)
-
-const total = computed(() => {
-  if (cartTotal.value) {
-    return cartTotal.value + tax.value + 100
-  }
-  return 0
-})
+const emit = defineEmits<{
+  checkout: []
+}>()
 </script>
 
 <template>
   <div class="flex flex-col gap-4 rounded-lg bg-[#F4F4FC] p-4 font-['Lato'] text-[#1D3178]">
     <div class="cart-row">
       <span>Subtotals</span>
-      <span>${{ cartTotal.toFixed(2) }}</span>
+      <span>${{ subtotal.toFixed(2) }}</span>
     </div>
     <div class="cart-row">
       <span>Shipping</span>
-      <span>$100</span>
+      <span>${{ shipping.toFixed(2) }}</span>
     </div>
     <div class="cart-row">
       <span>Tax (20%)</span>
@@ -40,7 +37,8 @@ const total = computed(() => {
         size="md"
         font="Lato"
         font-weight="700"
-        :disabled="cartTotal === 0"
+        :disabled="subtotal === 0 || shipping === 0"
+        @click="emit('checkout')"
       >
         Proceed To Checkout
       </BaseButton>

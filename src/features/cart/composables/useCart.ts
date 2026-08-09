@@ -14,8 +14,6 @@ interface UseCartReturn {
   items: Ref<CartItem[]>
   itemCount: ComputedRef<number>
   cartTotal: ComputedRef<number>
-  isLoading: Ref<boolean>
-  isError: Ref<string | null>
   updateQuantity: (product: UpdateQuantityInput, quantity: number) => void
   removeFromCart: (productId: number) => void
   clearCart: () => void
@@ -23,14 +21,12 @@ interface UseCartReturn {
 
 export function useCart(): UseCartReturn {
   const store = useCartStore()
-  const { items, itemCount, cartTotal, isLoading, isError } = storeToRefs(store)
+  const { items, itemCount, cartTotal } = storeToRefs(store)
 
   return {
     items,
     itemCount,
     cartTotal,
-    isLoading,
-    isError,
     updateQuantity: store.updateQuantity,
     removeFromCart: store.removeItem,
     clearCart: store.clearCart

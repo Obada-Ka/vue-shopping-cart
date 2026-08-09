@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { X } from 'lucide-vue-next'
-import { computed, onMounted } from 'vue'
-import { ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 
 import CartHeaders from '@/components/ui/CartHeaders.vue'
 import ProductCard from '@/components/ui/ProductCard.vue'
@@ -11,14 +10,22 @@ import CartSummary from '@/features/cart/components/CartSummary.vue'
 import { useProducts } from '@/features/products'
 import AddProduct from '@/features/products/components/AddProduct.vue'
 import ClearProducts from '@/features/products/components/ClearProducts.vue'
+import { useShipping } from '@/features/shipping'
 import ShippingCalculator from '@/features/shipping/components/ShippingCalculator.vue'
 
-const { products, isLoading, loadProducts, removeProduct } = useProducts()
-const { items, updateQuantity, removeFromCart } = useCart()
+const VAT_RATE = 0.2
+
+const { products, isLoading, loadProducts, removeProduct, clearProducts } = useProducts()
+const { items, cartTotal, updateQuantity, removeFromCart, clearCart } = useCart()
+const { cost: shippingCost, resetShipping } = useShipping()
 
 const isSummaryOpen = ref(false)
 
 onMounted(loadProducts)
+
+onUnmounted(() => {
+  document.body.style.overflow = ''
+})
 
 const listItems = computed(() =>
   products.value.map((product) => {
@@ -31,6 +38,10 @@ const listItems = computed(() =>
   })
 )
 
+const vat = computed(() => cartTotal.value * VAT_RATE)
+
+const grandTotal = computed(() => cartTotal.value + (shippingCost.value ?? 0) + vat.value)
+
 function handleQuantityChange(productId: number, quantity: number): void {
   const product = products.value.find((p) => p.id === productId)
   if (!product) return
@@ -42,6 +53,16 @@ function removeProductHandling(productId: number): void {
   removeFromCart(productId)
   removeProduct(productId)
 }
+
+function handleClearAll(): void {
+  clearProducts()
+  clearCart()
+  resetShipping()
+}
+
+watch(isSummaryOpen, (open) => {
+  document.body.style.overflow = open ? 'hidden' : ''
+})
 </script>
 
 <template>
@@ -75,11 +96,11 @@ function removeProductHandling(productId: number): void {
       </div>
 
       <div
-        class="sticky bottom-12 z-10 mt-8 flex gap-4 bg-white py-4 lg:static lg:z-auto lg:justify-between"
+        class="sticky bottom-12 z-10 mt-7.5 flex gap-4 bg-white py-4 lg:static lg:z-auto lg:justify-between"
       >
         <AddProduct class="flex-1 lg:flex-none" />
         <template v-if="listItems.length">
-          <ClearProducts class="flex-1 lg:flex-none" />
+          <ClearProducts class="flex-1 lg:flex-none" @clear="handleClearAll" />
         </template>
       </div>
 
@@ -113,8 +134,15 @@ function removeProductHandling(productId: number): void {
       <div class="py-3 text-center font-['Roboto'] text-xl font-bold text-[#1D3178]">
         Cart Totals
       </div>
-      <CartSummary />
-      <ShippingCalculator />
+      <div class="flex flex-col gap-5">
+        <CartSummary
+          :subtotal="cartTotal"
+          :shipping="shippingCost ?? 0"
+          :tax="vat"
+          :total="grandTotal"
+        />
+        <ShippingCalculator />
+      </div>
     </div>
   </div>
 </template>
