@@ -11,6 +11,8 @@ interface Props {
   disabled?: boolean
   loading?: boolean
   color?: string
+  font?: string
+  fontWeight?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -18,6 +20,8 @@ const props = withDefaults(defineProps<Props>(), {
   size: 'md',
   type: 'button',
   color: '#000000',
+  font: 'Roboto',
+  fontWeight: '400',
   disabled: false,
   loading: false
 })
@@ -28,7 +32,7 @@ const emit = defineEmits<{
 
 const buttonClasses = computed(() => [
   'inline-flex items-center justify-center gap-2',
-  'rounded-md font-medium transition-colors',
+  'rounded-sm transition-colors',
   'focus:outline-none focus:ring-2 focus:ring-offset-2',
   'disabled:cursor-not-allowed disabled:opacity-50',
 
@@ -62,7 +66,7 @@ const handleClick = (event: MouseEvent): void => {
     :type="type"
     :disabled="disabled || loading"
     :class="buttonClasses"
-    :style="{ backgroundColor: color }"
+    :style="{ backgroundColor: color, fontFamily: font, fontWeight: fontWeight }"
     class="cursor-pointer"
     @click="handleClick"
   >

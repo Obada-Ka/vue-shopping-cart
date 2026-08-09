@@ -28,25 +28,25 @@ function increment(): void {
 </script>
 
 <template>
-  <div class="inline-flex h-1/2 w-1/2 overflow-hidden rounded-lg bg-indigo-50">
+  <div class="inline-flex h-9 w-32 overflow-hidden rounded-lg bg-indigo-50 lg:h-11 lg:w-44">
     <button
       type="button"
       aria-label="Decrease quantity"
-      class="flex w-1/3 cursor-pointer items-center justify-center bg-indigo-100 text-lg font-medium text-gray-400 transition hover:bg-indigo-200 disabled:cursor-not-allowed disabled:opacity-50"
+      class="flex w-1/3 cursor-pointer items-center justify-center bg-indigo-100 text-base font-medium text-gray-400 transition hover:bg-indigo-200 disabled:cursor-not-allowed disabled:opacity-50 lg:text-lg"
       :disabled="modelValue <= min"
       @click="decrement"
     >
       &minus;
     </button>
 
-    <div class="flex w-1/3 items-center justify-center text-lg text-gray-400">
+    <div class="flex w-1/3 items-center justify-center text-base text-gray-400 lg:text-lg">
       {{ modelValue }}
     </div>
 
     <button
       type="button"
       aria-label="Increase quantity"
-      class="flex w-1/3 cursor-pointer items-center justify-center bg-indigo-100 text-lg font-medium text-gray-400 transition hover:bg-indigo-200 disabled:cursor-not-allowed disabled:opacity-50"
+      class="flex w-1/3 cursor-pointer items-center justify-center bg-indigo-100 text-base font-medium text-gray-400 transition hover:bg-indigo-200 disabled:cursor-not-allowed disabled:opacity-50 lg:text-lg"
       :disabled="modelValue >= max"
       @click="increment"
     >

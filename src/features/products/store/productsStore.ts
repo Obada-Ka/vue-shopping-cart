@@ -10,7 +10,7 @@ export const useProductsStore = defineStore('products', () => {
   const products = ref<Product[]>([])
   const isLoading = ref(false)
   const error = ref<string | null>(null)
-
+  let nextLocalId = Date.now()
   async function loadProducts(): Promise<void> {
     isLoading.value = true
     error.value = null
@@ -28,7 +28,8 @@ export const useProductsStore = defineStore('products', () => {
     isLoading.value = true
     error.value = null
     try {
-      products.value = [...products.value, await createNewProduct(productInput)]
+      const created = await createNewProduct(productInput)
+      products.value.push({ ...created, id: nextLocalId++ })
     } catch (err) {
       error.value = err instanceof Error ? err.message : 'Failed to load products'
     } finally {
