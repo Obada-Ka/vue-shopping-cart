@@ -23,10 +23,15 @@ export const useProductsStore = defineStore('products', () => {
     }
   }
 
+  function removeProduct(productId: number): void {
+    products.value = products.value.filter((product) => product.id !== productId)
+  }
+
   return {
     products,
     isLoading,
     error,
+    removeProduct,
     loadProducts
   }
 })

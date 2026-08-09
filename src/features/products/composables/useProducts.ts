@@ -10,6 +10,7 @@ interface UseProductReturn {
   isLoading: Ref<boolean>
   error: Ref<string | null>
   loadProducts: () => Promise<void>
+  removeProduct: (productId: number) => void
 }
 
 export function useProducts(): UseProductReturn {
@@ -20,6 +21,7 @@ export function useProducts(): UseProductReturn {
     products,
     isLoading,
     error,
-    loadProducts: store.loadProducts
+    loadProducts: store.loadProducts,
+    removeProduct: store.removeProduct
   }
 }
