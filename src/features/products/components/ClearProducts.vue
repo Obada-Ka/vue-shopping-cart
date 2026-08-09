@@ -5,13 +5,13 @@ import { useProducts } from '../composables/useProducts'
 
 const { clearProducts, isLoading } = useProducts()
 
-function handleAdd(): void {
+function handleClear(): void {
   clearProducts()
 }
 </script>
 
 <template>
-  <BaseButton :loading="isLoading" color="#FB2E86" size="lg" @click="handleAdd">
+  <BaseButton :loading="isLoading" color="#FB2E86" size="lg" @click="handleClear">
     Clear Cart
   </BaseButton>
 </template>

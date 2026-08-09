@@ -35,6 +35,7 @@ function handleQuantityChange(productId: number, quantity: number): void {
 }
 
 function removeProductHandling(productId: number): void {
+  console.log('Removing product with ID:', productId)
   removeFromCart(productId)
   removeProduct(productId)
 }
@@ -68,7 +69,7 @@ function removeProductHandling(productId: number): void {
 
       <div class="mt-4 flex justify-between gap-4">
         <AddProduct />
-        <ClearProducts />
+        <template v-if="listItems.length"> <ClearProducts /></template>
       </div>
     </div>
 
