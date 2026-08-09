@@ -1,4 +1,17 @@
-<script lang="ts"></script>
+<script setup lang="ts">
+import BaseButton from '@/components/ui/BaseButton.vue'
+
+import { useProducts } from '../composables/useProducts'
+
+const { clearProducts, isLoading } = useProducts()
+
+function handleAdd(): void {
+  clearProducts()
+}
+</script>
+
 <template>
-  <div>Clear products action</div>
+  <BaseButton :loading="isLoading" color="#FB2E86" size="lg" @click="handleAdd">
+    Clear Cart
+  </BaseButton>
 </template>

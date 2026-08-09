@@ -59,7 +59,14 @@ function removeProductHandling(productId: number): void {
         />
       </template>
 
-      <div class="mt-4 flex gap-4">
+      <div v-if="!isLoading && !listItems.length">
+        <div class="flex flex-col items-center justify-center gap-4 rounded-md bg-[#D6D6D6] py-20">
+          <h2 class="text-2xl font-bold text-[#1D3178]">Your cart is empty</h2>
+          <p class="text-lg text-[#1D3178]">Please try again later, or add an item.</p>
+        </div>
+      </div>
+
+      <div class="mt-4 flex justify-between gap-4">
         <AddProduct />
         <ClearProducts />
       </div>

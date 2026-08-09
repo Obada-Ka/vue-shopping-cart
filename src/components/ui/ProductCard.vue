@@ -34,7 +34,14 @@ function handleRemove(): void {
     <div class="flex min-w-0 items-center gap-4">
       <div class="relative h-20 w-20 shrink-0">
         <div class="h-full w-full overflow-hidden rounded-md border border-gray-300 bg-white p-2">
-          <img :src="product.image" :alt="product.title" class="h-full w-full object-contain" />
+          <img
+            v-if="product.image"
+            :src="product.image"
+            :alt="product.title"
+            class="h-full w-full object-contain p-2"
+          />
+
+          <span v-else class="text-center text-sm text-gray-400"> No image available </span>
         </div>
 
         <button
