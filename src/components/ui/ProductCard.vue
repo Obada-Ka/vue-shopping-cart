@@ -44,10 +44,10 @@ function handleRemove(): void {
         <button
           type="button"
           aria-label="Remove product"
-          class="absolute -top-2 -left-2 flex h-6 w-6 items-center justify-center rounded-full bg-black text-xs font-semibold text-white shadow-md transition hover:bg-gray-700 lg:-right-2 lg:left-auto"
+          class="absolute -top-2 -left-2 flex h-5 w-5 items-center justify-center rounded-full bg-black text-xs font-semibold text-white shadow-md transition hover:bg-gray-700 lg:-right-2 lg:left-auto"
           @click="handleRemove"
         >
-          <X :size="16" :stroke-width="3" :absolute-stroke-width="true" />
+          <X :size="12" :stroke-width="3" :absolute-stroke-width="true" />
         </button>
       </div>
 
