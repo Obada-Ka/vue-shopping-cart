@@ -24,7 +24,7 @@ const isSummaryOpen = ref(false)
 onMounted(loadProducts)
 
 onUnmounted(() => {
-  document.body.style.overflow = ''
+  document.body.classList.remove('overflow-hidden')
 })
 
 const listItems = computed(() =>
@@ -61,13 +61,18 @@ function handleClearAll(): void {
 }
 
 watch(isSummaryOpen, (open) => {
-  document.body.style.overflow = open ? 'hidden' : ''
+  document.body.classList.toggle('overflow-hidden', open)
 })
 </script>
 
 <template>
   <div class="relative grid grid-cols-1 items-start gap-4 lg:grid-cols-5">
-    <div class="lg:col-span-4">
+    <div
+      class="lg:col-span-4"
+      :class="
+        isSummaryOpen && 'pointer-events-none select-none lg:pointer-events-auto lg:select-auto'
+      "
+    >
       <div class="hidden pb-10 lg:block"><CartHeaders /></div>
       <div class="sticky top-0 z-10 block border-b border-gray-300 bg-white py-4 lg:hidden">
         <span class="text-xl font-bold text-[#1D3178]"> Products </span>
@@ -95,22 +100,22 @@ watch(isSummaryOpen, (open) => {
         </div>
       </div>
 
-      <div
-        class="sticky bottom-12 z-10 mt-7.5 flex gap-4 bg-white py-4 lg:static lg:z-auto lg:justify-between"
-      >
-        <AddProduct class="flex-1 lg:flex-none" />
-        <template v-if="listItems.length">
-          <ClearProducts class="flex-1 lg:flex-none" @clear="handleClearAll" />
-        </template>
-      </div>
+      <div class="sticky bottom-0 z-10 flex flex-col gap-4 bg-white py-4 lg:static lg:z-auto">
+        <div class="flex gap-4 lg:justify-between">
+          <AddProduct class="flex-1 lg:flex-none" />
+          <template v-if="listItems.length">
+            <ClearProducts class="flex-1 lg:flex-none" @clear="handleClearAll" />
+          </template>
+        </div>
 
-      <button
-        type="button"
-        class="sticky bottom-0 z-10 mt-4 w-full rounded-md bg-[#1D3178] py-3 text-white lg:hidden"
-        @click="isSummaryOpen = true"
-      >
-        View Cart Summary
-      </button>
+        <button
+          type="button"
+          class="w-full rounded-md bg-[#1D3178] py-3 text-white lg:hidden"
+          @click="isSummaryOpen = true"
+        >
+          View Cart Summary
+        </button>
+      </div>
     </div>
 
     <div

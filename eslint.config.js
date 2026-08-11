@@ -3,6 +3,7 @@ import importPlugin from 'eslint-plugin-import'
 import vue from 'eslint-plugin-vue'
 import tseslint from 'typescript-eslint'
 import vueParser from 'vue-eslint-parser'
+import globals from 'globals'
 
 export default tseslint.config(
   {
@@ -36,6 +37,9 @@ export default tseslint.config(
         projectService: true,
         tsconfigRootDir: import.meta.dirname,
         extraFileExtensions: ['.vue']
+      },
+      globals: {
+        ...globals.browser
       }
     },
     plugins: { import: importPlugin },
@@ -107,6 +111,24 @@ export default tseslint.config(
               from: './src/features/*/!(index.ts)',
               message:
                 "Do not import a feature's internals directly. Import from the feature's public API (e.g. '@/features/auth') instead of reaching into its components/composables/store."
+            },
+            {
+              target: './src/features/cart',
+              from: ['./src/features/products', './src/features/shipping'],
+              message:
+                'features/cart cannot import from other features. Compose them at the page level instead.'
+            },
+            {
+              target: './src/features/products',
+              from: ['./src/features/cart', './src/features/shipping'],
+              message:
+                'features/products cannot import from other features. Compose them at the page level instead.'
+            },
+            {
+              target: './src/features/shipping',
+              from: ['./src/features/products', './src/features/cart'],
+              message:
+                'features/shipping cannot import from other features. Compose them at the page level instead.'
             }
           ]
         }
