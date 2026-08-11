@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { X } from 'lucide-vue-next'
 
-import QuantityStepper from '@/components/ui/QuantityStepper.vue'
+import QuantityStepper from '@/components/ui/QuantityStepper'
 
 interface Props {
   product: {

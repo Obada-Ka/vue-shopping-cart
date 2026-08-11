@@ -2,9 +2,9 @@
 import { X } from 'lucide-vue-next'
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 
-import CartHeaders from '@/components/ui/CartHeaders.vue'
-import ProductCard from '@/components/ui/ProductCard.vue'
-import ProductCardSkeleton from '@/components/ui/ProductCardSkeleton.vue'
+import CartHeaders from '@/components/ui/CartHeaders'
+import ProductCard from '@/components/ui/ProductCard'
+import ProductCardSkeleton from '@/components/ui/ProductCardSkeleton'
 import { useCart } from '@/features/cart'
 import CartSummary from '@/features/cart/components/CartSummary.vue'
 import { useProducts } from '@/features/products'
@@ -73,7 +73,9 @@ watch(isSummaryOpen, (open) => {
         isSummaryOpen && 'pointer-events-none select-none lg:pointer-events-auto lg:select-auto'
       "
     >
-      <div class="hidden pb-10 lg:block"><CartHeaders /></div>
+      <div class="hidden pb-10 lg:block">
+        <CartHeaders :titles="['Product', 'Price', 'Quantity', 'Total']" />
+      </div>
       <div class="sticky top-0 z-10 block border-b border-gray-300 bg-white py-4 lg:hidden">
         <span class="text-xl font-bold text-[#1D3178]"> Products </span>
       </div>
