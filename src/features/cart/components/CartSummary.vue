@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { toast } from 'vue-sonner'
+
 import BaseButton from '@/components/ui/BaseButton'
 
 defineProps<{
@@ -11,6 +13,11 @@ defineProps<{
 const emit = defineEmits<{
   checkout: []
 }>()
+
+const handleCheckout = (): void => {
+  toast.success('Proceeding to checkout!')
+  emit('checkout')
+}
 </script>
 
 <template>
@@ -19,18 +26,22 @@ const emit = defineEmits<{
       <span>Subtotals</span>
       <span>${{ subtotal.toFixed(2) }}</span>
     </div>
+
     <div class="cart-row">
       <span>Shipping</span>
       <span>${{ shipping.toFixed(2) }}</span>
     </div>
+
     <div class="cart-row">
       <span>Tax (20%)</span>
       <span>${{ tax.toFixed(2) }}</span>
     </div>
+
     <div class="cart-row pt-4">
       <span>Totals</span>
       <span>${{ total.toFixed(2) }}</span>
     </div>
+
     <div class="flex justify-center">
       <BaseButton
         color="#19D16F"
@@ -38,7 +49,7 @@ const emit = defineEmits<{
         font="Lato"
         font-weight="700"
         :disabled="subtotal === 0 || shipping === 0"
-        @click="emit('checkout')"
+        @click="handleCheckout"
       >
         Proceed To Checkout
       </BaseButton>
@@ -48,6 +59,7 @@ const emit = defineEmits<{
 
 <style scoped>
 @reference "@/assets/styles/main.css";
+
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 
 .cart-row {
