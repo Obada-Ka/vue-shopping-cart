@@ -1,20 +1,17 @@
 <script setup lang="ts">
 import BaseButton from '@/components/ui/BaseButton.vue'
-import { useCart } from '@/features/cart'
 
 import { useProducts } from '../composables/useProducts'
 
-const { clearProducts, isLoading } = useProducts()
-const { clearCart } = useCart()
+const { isLoading } = useProducts()
 
-function handleClearAll(): void {
-  clearProducts()
-  clearCart()
-}
+const emit = defineEmits<{
+  clear: []
+}>()
 </script>
 
 <template>
-  <BaseButton :loading="isLoading" color="#FB2E86" size="lg" @click="handleClearAll">
+  <BaseButton :loading="isLoading" color="#FB2E86" size="lg" @click="emit('clear')">
     Clear Cart
   </BaseButton>
 </template>
