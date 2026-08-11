@@ -2,7 +2,6 @@ import { mount } from '@vue/test-utils'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { ref, computed } from 'vue'
 
-// 1. Reactive mock refs for products
 const mockProducts = ref([
   {
     id: 1,
@@ -25,7 +24,6 @@ const mockLoadProducts = vi.fn()
 const mockRemoveProduct = vi.fn()
 const mockClearProducts = vi.fn()
 
-// 2. Reactive mock refs for cart
 const mockCartItems = ref([
   { productId: 1, name: 'Wireless Earbuds', price: 50, quantity: 1, total: 50 },
   { productId: 2, name: 'Mechanical Keyboard', price: 100, quantity: 2, total: 200 }
@@ -38,13 +36,11 @@ const mockUpdateQuantity = vi.fn()
 const mockRemoveFromCart = vi.fn()
 const mockClearCart = vi.fn()
 
-// 3. Reactive mock refs for shipping
 const mockShippingCost = ref<number | null>(15)
 const mockIsCalculating = ref(false)
 const mockCalculateShipping = vi.fn()
 const mockResetShipping = vi.fn()
 
-// 4. Mock composable modules before importing the target component
 vi.mock('@/features/products', () => ({
   useProducts: () => ({
     products: mockProducts,
@@ -168,7 +164,6 @@ describe('ShoppingCartPage.vue', () => {
     const wrapper = createWrapper()
     const summaryComponent = wrapper.findComponent(CartSummary)
 
-    // subtotal = 250, vat (20%) = 50, shipping = 15 -> grandTotal = 315
     expect(summaryComponent.props('subtotal')).toBe(250)
     expect(summaryComponent.props('tax')).toBe(50)
     expect(summaryComponent.props('shipping')).toBe(15)
