@@ -1,5 +1,5 @@
 <template>
-  <div class="skeleton-card border-b border-[#E1E1E4] py-4">
+  <div class="skeleton-card border-divider border-b py-4">
     <div class="product-area flex min-w-0 items-center gap-4">
       <div class="h-20 w-20 shrink-0 animate-pulse rounded-md bg-gray-200"></div>
 

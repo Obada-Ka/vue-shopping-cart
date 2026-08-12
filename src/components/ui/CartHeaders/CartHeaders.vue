@@ -9,7 +9,7 @@ defineProps<Props>()
 
 <template>
   <div
-    class="grid gap-8 py-2 pr-2 text-xl font-bold text-[#1D3178]"
+    class="text-brand grid gap-8 py-2 pr-2 text-xl font-bold"
     :style="{
       gridTemplateColumns: `2fr ${'1fr '.repeat(titles.length - 1)}`
     }"

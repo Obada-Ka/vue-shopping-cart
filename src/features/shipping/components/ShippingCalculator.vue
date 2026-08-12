@@ -39,7 +39,7 @@ function handleSubmit(): void {
 
 <template>
   <form
-    class="flex flex-col gap-4 rounded-lg bg-[#F4F4FC] p-4 font-['Lato'] text-[#1D3178]"
+    class="text-brand bg-background flex flex-col gap-4 rounded-lg p-4 font-['Lato']"
     @submit.prevent="handleSubmit"
   >
     <div class="cart-row flex-col items-start gap-1 border-none pb-0">
@@ -47,8 +47,7 @@ function handleSubmit(): void {
         v-model="city"
         type="text"
         placeholder="City"
-        class="w-full rounded rounded-b-none border-b p-2 text-base font-normal text-[#1D3178] outline-none!"
-        :class="!isCityValid && city.length === 0 ? 'border-[#0843FC]' : 'border-[#0843FC]'"
+        class="text-brand border-input-border w-full rounded rounded-b-none border-b p-2 text-base font-normal outline-none!"
         required
       />
     </div>
@@ -58,7 +57,7 @@ function handleSubmit(): void {
         v-model="street"
         type="text"
         placeholder="Street"
-        class="w-full rounded rounded-b-none border-b border-[#0843FC] p-2 text-base font-normal text-[#1D3178] outline-none!"
+        class="text-brand border-input-border w-full rounded rounded-b-none border-b p-2 text-base font-normal outline-none!"
         required
       />
     </div>
@@ -68,7 +67,7 @@ function handleSubmit(): void {
         v-model="zipCode"
         type="text"
         placeholder="Zip Code"
-        class="w-full rounded rounded-b-none border-b border-[#0843FC] p-2 text-base font-normal text-[#1D3178] outline-none!"
+        class="text-brand border-input-border w-full rounded rounded-b-none border-b p-2 text-base font-normal outline-none!"
         required
       />
     </div>
@@ -79,7 +78,11 @@ function handleSubmit(): void {
     </div>
 
     <div class="flex justify-center">
-      <BaseButton color="#FB2E86" type="submit" :disabled="!isFormValid || isCalculating">
+      <BaseButton
+        color="var(--color-brand-pink)"
+        type="submit"
+        :disabled="!isFormValid || isCalculating"
+      >
         {{ isCalculating ? 'Calculating…' : 'Calculate Shipping' }}
       </BaseButton>
     </div>
@@ -90,10 +93,10 @@ function handleSubmit(): void {
 @reference "@/assets/styles/main.css";
 
 .cart-row {
-  @apply flex justify-between pb-2 text-base font-normal text-[#1D3178];
+  @apply text-brand flex justify-between pb-2 text-base font-normal;
 }
 
 .cart-row span:first-child {
-  @apply text-lg font-semibold text-[#1D3178];
+  @apply text-brand text-lg font-semibold;
 }
 </style>
