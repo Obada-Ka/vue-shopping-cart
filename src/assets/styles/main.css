@@ -1,2 +1,11 @@
 @import 'tailwindcss';
 @import 'vue-sonner/style.css';
+
+@theme {
+  --color-brand: #1d3178;
+  --color-brand-green: #19d16f;
+  --color-brand-pink: #fb2e86;
+  --color-input-border: #0843fc;
+  --color-background: #f4f4fc;
+  --color-divider: #e1e1e4;
+}

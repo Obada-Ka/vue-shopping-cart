@@ -11,7 +11,7 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <BaseButton :loading="isLoading" color="#FB2E86" size="lg" @click="emit('clear')">
+  <BaseButton :loading="isLoading" color="var(--color-brand-pink)" size="lg" @click="emit('clear')">
     Clear Cart
   </BaseButton>
 </template>

@@ -3,25 +3,28 @@ import { toast } from 'vue-sonner'
 
 import BaseButton from '@/components/ui/BaseButton'
 
-defineProps<{
+const props = defineProps<{
   subtotal: number
   shipping: number
   tax: number
   total: number
 }>()
-
 const emit = defineEmits<{
   checkout: []
 }>()
 
 const handleCheckout = (): void => {
-  toast.success('Proceeding to checkout!')
+  if (props.shipping === 0) {
+    toast.warning('Proceeding without a calculated shipping cost')
+  } else {
+    toast.success('Proceeding to checkout!')
+  }
   emit('checkout')
 }
 </script>
 
 <template>
-  <div class="flex flex-col gap-4 rounded-lg bg-[#F4F4FC] p-4 font-['Lato'] text-[#1D3178]">
+  <div class="text-brand bg-background flex flex-col gap-4 rounded-lg p-4 font-['Lato']">
     <div class="cart-row">
       <span>Subtotals</span>
       <span>${{ subtotal.toFixed(2) }}</span>
@@ -44,11 +47,11 @@ const handleCheckout = (): void => {
 
     <div class="flex justify-center">
       <BaseButton
-        color="#19D16F"
+        color="var(--color-brand-green)"
         size="md"
         font="Lato"
         font-weight="700"
-        :disabled="subtotal === 0 || shipping === 0"
+        :disabled="subtotal === 0"
         @click="handleCheckout"
       >
         Proceed To Checkout
@@ -63,10 +66,10 @@ const handleCheckout = (): void => {
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 
 .cart-row {
-  @apply flex justify-between border-b border-[#E8E6F1] pb-2 text-base font-normal text-[#1D3178];
+  @apply text-brand border-divider flex justify-between border-b pb-2 text-base font-normal;
 }
 
 .cart-row span:first-child {
-  @apply text-lg font-semibold text-[#1D3178];
+  @apply text-brand text-lg font-semibold;
 }
 </style>

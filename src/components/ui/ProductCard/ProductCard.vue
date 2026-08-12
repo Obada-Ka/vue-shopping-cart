@@ -28,7 +28,7 @@ function handleRemove(): void {
 </script>
 
 <template>
-  <div class="product-card border-b border-[#E1E1E4] px-2 py-4 font-['Roboto']">
+  <div class="product-card border-divider border-b px-2 py-4 font-['Roboto']">
     <div class="product-area flex min-w-0 items-center gap-4">
       <div class="relative h-20 w-20 shrink-0">
         <div class="h-full w-full overflow-hidden rounded-md border border-gray-300 bg-white p-2">
@@ -44,7 +44,7 @@ function handleRemove(): void {
         <button
           type="button"
           aria-label="Remove product"
-          class="absolute -top-2 -left-2 flex h-5 w-5 items-center justify-center rounded-full bg-black text-xs font-semibold text-white shadow-md transition hover:bg-gray-700 lg:-right-2 lg:left-auto"
+          class="absolute -top-2 -left-2 flex h-5 w-5 cursor-pointer items-center justify-center rounded-full bg-black text-xs font-semibold text-white shadow-md transition hover:bg-gray-700 lg:-right-2 lg:left-auto"
           @click="handleRemove"
         >
           <X :size="12" :stroke-width="3" :absolute-stroke-width="true" />
@@ -77,7 +77,7 @@ function handleRemove(): void {
 @reference "@/assets/styles/main.css";
 
 .label {
-  @apply text-sm font-semibold text-[#1D3178];
+  @apply text-brand text-sm font-semibold;
 }
 .value {
   @apply text-sm text-[#15245E];

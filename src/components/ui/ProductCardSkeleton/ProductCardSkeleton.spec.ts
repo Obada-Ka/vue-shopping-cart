@@ -16,7 +16,7 @@ describe('ProductCardSkeleton.vue', () => {
 
     expect(container.exists()).toBe(true)
     expect(container.classes()).toContain('border-b')
-    expect(container.classes()).toContain('border-[#E1E1E4]')
+    expect(container.classes()).toContain('border-divider')
   })
 
   it('renders animated skeleton pulse placeholders', () => {

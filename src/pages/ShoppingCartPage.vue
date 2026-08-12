@@ -73,14 +73,14 @@ watch(isSummaryOpen, (open) => {
         isSummaryOpen && 'pointer-events-none select-none lg:pointer-events-auto lg:select-auto'
       "
     >
-      <div class="hidden pb-10 lg:block">
-        <CartHeaders :titles="['Product', 'Price', 'Quantity', 'Total']" />
-      </div>
       <div class="sticky top-0 z-10 block border-b border-gray-300 bg-white py-4 lg:hidden">
-        <span class="text-xl font-bold text-[#1D3178]"> Products </span>
+        <span class="text-brand text-xl font-bold"> Products </span>
       </div>
 
-      <div class="min-h-fit overflow-y-auto lg:max-h-[480px] lg:min-h-0">
+      <div class="min-h-fit overflow-y-auto lg:max-h-[625px] lg:min-h-0">
+        <div class="hidden bg-white pb-4 lg:sticky lg:top-0 lg:z-10 lg:block">
+          <CartHeaders :titles="['Product', 'Price', 'Quantity', 'Total']" />
+        </div>
         <template v-if="isLoading">
           <ProductCardSkeleton v-for="n in 5" :key="n" />
         </template>
@@ -97,8 +97,8 @@ watch(isSummaryOpen, (open) => {
 
       <div v-if="!isLoading && !listItems.length">
         <div class="flex flex-col items-center justify-center gap-4 rounded-md bg-[#D6D6D6] py-20">
-          <h2 class="text-2xl font-bold text-[#1D3178]">Your cart is empty</h2>
-          <p class="text-lg text-[#1D3178]">Please try again later, or add an item.</p>
+          <h2 class="text-brand text-2xl font-bold">Your cart is empty</h2>
+          <p class="text-brand text-lg">Please try again later, or add an item.</p>
         </div>
       </div>
 
@@ -132,15 +132,13 @@ watch(isSummaryOpen, (open) => {
     >
       <button
         type="button"
-        class="self-end text-sm text-[#1D3178] lg:hidden"
+        class="text-brand self-end text-sm lg:hidden"
         @click="isSummaryOpen = false"
       >
         <X :size="16" :stroke-width="3" :absolute-stroke-width="true" />
       </button>
 
-      <div class="py-3 text-center font-['Roboto'] text-xl font-bold text-[#1D3178]">
-        Cart Totals
-      </div>
+      <div class="text-brand py-3 text-center font-['Roboto'] text-xl font-bold">Cart Totals</div>
       <div class="flex flex-col gap-5">
         <CartSummary
           :subtotal="cartTotal"

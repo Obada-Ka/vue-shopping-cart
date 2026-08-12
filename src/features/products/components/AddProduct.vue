@@ -14,7 +14,7 @@ async function handleAdd(): Promise<void> {
 </script>
 
 <template>
-  <BaseButton :loading="isLoading" color="#19D16F" size="lg" @click="handleAdd">
+  <BaseButton :loading="isLoading" color="var(--color-brand-green)" size="lg" @click="handleAdd">
     Add Item
   </BaseButton>
 </template>

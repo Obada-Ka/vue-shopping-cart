@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref, watch } from 'vue'
+
 interface Props {
   modelValue: number
   min?: number
@@ -14,6 +16,19 @@ const emit = defineEmits<{
   'update:modelValue': [value: number]
 }>()
 
+const inputValue = ref(String(props.modelValue))
+
+watch(
+  () => props.modelValue,
+  (value) => {
+    inputValue.value = String(value)
+  }
+)
+
+function clamp(value: number): number {
+  return Math.min(props.max, Math.max(props.min, value))
+}
+
 function decrement(): void {
   if (props.modelValue > props.min) {
     emit('update:modelValue', props.modelValue - 1)
@@ -23,6 +38,36 @@ function decrement(): void {
 function increment(): void {
   if (props.modelValue < props.max) {
     emit('update:modelValue', props.modelValue + 1)
+  }
+}
+
+function handleInput(event: Event): void {
+  const target = event.target as HTMLInputElement
+  const filtered = target.value.replace(/[^0-9]/g, '')
+
+  inputValue.value = filtered
+  target.value = filtered
+}
+
+function handleBlur(): void {
+  const parsed = parseInt(inputValue.value, 10)
+
+  if (Number.isNaN(parsed)) {
+    inputValue.value = String(props.modelValue)
+    return
+  }
+
+  const clamped = clamp(parsed)
+  inputValue.value = String(clamped)
+
+  if (clamped !== props.modelValue) {
+    emit('update:modelValue', clamped)
+  }
+}
+
+function handleKeydown(event: KeyboardEvent): void {
+  if (event.key === 'Enter') {
+    ;(event.target as HTMLInputElement).blur()
   }
 }
 </script>
@@ -39,9 +84,16 @@ function increment(): void {
       &minus;
     </button>
 
-    <div class="flex w-1/3 items-center justify-center text-base text-gray-400 lg:text-lg">
-      {{ modelValue }}
-    </div>
+    <input
+      :value="inputValue"
+      type="text"
+      inputmode="numeric"
+      aria-label="Quantity"
+      class="w-1/3 bg-transparent text-center text-base text-gray-600 outline-none lg:text-lg"
+      @input="handleInput"
+      @blur="handleBlur"
+      @keydown="handleKeydown"
+    />
 
     <button
       type="button"
