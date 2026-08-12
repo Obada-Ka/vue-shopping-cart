@@ -46,11 +46,6 @@ function handleInput(event: Event): void {
   const filtered = target.value.replace(/[^0-9]/g, '')
 
   inputValue.value = filtered
-  // Force the native element's value in sync immediately — Vue's :value
-  // binding won't re-patch the DOM if `filtered` happens to equal the
-  // previous ref value (e.g. typing a letter after existing digits
-  // strips back to the same string), which would otherwise leave the
-  // invalid character visibly stuck in the input.
   target.value = filtered
 }
 
