@@ -27,6 +27,9 @@ export default defineConfig({
       provider: 'v8',
       reporter: ['text', 'html'],
       exclude: ['**/*.spec.ts', '**/*.d.ts', 'src/main.ts']
+    },
+    env: {
+      VITE_PRODUCTS_API_URL: 'https://fakestoreapi.com/products'
     }
   }
 })
