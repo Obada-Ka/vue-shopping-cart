@@ -4,7 +4,7 @@ import { productSchema, type Product } from '@/domain/product/product.schema'
 
 import { createProductResponseSchema, type CreateProductInput } from '../types'
 
-const PRODUCTS_API_URL = 'https://fakestoreapi.com/products'
+const PRODUCTS_API_URL = import.meta.env.VITE_PRODUCTS_API_URL
 
 export async function fetchProducts(): Promise<Product[]> {
   const response = await fetch(PRODUCTS_API_URL)

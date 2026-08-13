@@ -22,9 +22,6 @@ const isFormEmpty = computed(
   () => !city.value.trim() && !street.value.trim() && !zipCode.value.trim()
 )
 
-// Reset the calculated cost the moment the user clears every field —
-// stale shipping cost shouldn't persist once the address it was based on
-// has been wiped out.
 watch(isFormEmpty, (empty) => {
   if (empty) {
     resetShipping()
