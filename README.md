@@ -31,6 +31,7 @@ This repository contains a modern, feature-rich shopping cart application built 
 
 The project uses a **layered, feature-based architecture** loosely inspired by Feature-Sliced Design (FSD). Rather than implementing FSD's full layer stack, it takes a pragmatic subset suited to this project's size: logic is organized by business domain rather than technical concern, with a strict one-directional dependency rule enforced between layers.
 
+```
 src
 ├── assets/ # Global styles and assets
 ├── components/ # Reusable, shared UI components (e.g., BaseButton)
@@ -42,6 +43,7 @@ src
 ├── pages/ # Top-level page components that compose features
 ├── router/ # Vue Router configuration
 └── main.ts # Application entry point
+```
 
 **Dependency rule:** higher layers may import lower layers, never the reverse — `pages → features → components → composables/domain`. Features never import from other features directly; cross-feature composition happens only at the page level. These boundaries are enforced by ESLint (`import/no-restricted-paths`), not just convention — an import that violates a boundary fails the lint step, not just a code review.
 
