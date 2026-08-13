@@ -67,6 +67,13 @@ watch(isSummaryOpen, (open) => {
 
 <template>
   <div class="relative grid grid-cols-1 items-start gap-4 lg:grid-cols-5">
+    <!--
+  Accessibility note: I used pointer-events-none + scroll-lock here rather
+  than the native `inert` attribute. This blocks all mouse/touch interaction
+  with the background while the drawer is open, but does NOT prevent
+  keyboard Tab navigation from reaching background elements — a known,
+  accepted gap given this project's scope
+  -->
     <div
       class="lg:col-span-4"
       :class="
